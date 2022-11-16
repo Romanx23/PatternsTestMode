@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
@@ -37,6 +38,7 @@ public class RegistrationTest {
         $("[data-test-id=password] .input__control").setValue(notRegisteredUser.getPassword());
         $(".button").click();
         $("[data-test-id=error-notification] .notification__content").shouldHave(Condition.text("Неверно указан логин или пароль"));
+        $(withText("Неверно указан логин или пароль")).shouldBe(Condition.visible);
     }
 
     @Test
@@ -47,6 +49,7 @@ public class RegistrationTest {
         $("[data-test-id=password] .input__control").setValue(blockedUser.getPassword());
         $(".button").click();
         $("[data-test-id=error-notification] .notification__content").shouldHave(Condition.text("Пользователь заблокирован"));
+        $(withText("Пользователь заблокирован")).shouldBe(Condition.visible);
     }
 
     @Test
@@ -58,6 +61,7 @@ public class RegistrationTest {
         $("[data-test-id=password] .input__control").setValue(registeredUser.getPassword());
         $(".button").click();
         $("[data-test-id=error-notification] .notification__content").shouldHave(Condition.text("Неверно указан логин или пароль"));
+        $(withText("Неверно указан логин или пароль")).shouldBe(Condition.visible);
     }
 
     @Test
@@ -69,5 +73,6 @@ public class RegistrationTest {
         $("[data-test-id=password] .input__control").setValue(wrongPassword);
         $(".button").click();
         $("[data-test-id=error-notification] .notification__content").shouldHave(Condition.text("Неверно указан логин или пароль"));
+        $(withText("Неверно указан логин или пароль")).shouldBe(Condition.visible);
     }
 }
